@@ -34,16 +34,16 @@ namespace Formacion.CSharp.ConsolaApp1
             //Instanciamos un objeto y modificamos sus propiedades o variables
             Alumno alumno = new Alumno()
             {
-                Nombre = "Julian",
+                Nombre = "David",
                 Apellidos = "Sánchez",
-                Edad = 24
+                Edad = 23
             };
 
             //Instanciamos un objeto y modificamos sus propiedades o variables
             Alumno alumno1 = new Alumno();
-            alumno1.Nombre = "Julian";
+            alumno1.Nombre = "David";
             alumno1.Nombre = "Sánchez";
-            alumno1.Edad = 24;
+            alumno1.Edad = 23;
 
             //Instaciamos un objeto con VAR, OBJECT y DYNAMIC
             var alumno2 = new Alumno();
@@ -79,12 +79,12 @@ namespace Formacion.CSharp.ConsolaApp1
             Console.WriteLine(numeros2[5]);
 
             Alumno[] alumnos = new Alumno[20];
-            Alumno[] alumnos2 = { new Alumno() { Nombre = "Julian", Apellidos = "Sánchez", Edad = 24 }, new Alumno(), new Alumno() };
+            Alumno[] alumnos2 = { new Alumno() { Nombre = "David", Apellidos = "Sánchez", Edad = 23 }, new Alumno(), new Alumno() };
             Alumno[] alumnos3 = { new Alumno(), new Alumno(), new Alumno() };
 
-            alumnos3[1].Nombre = "Ana María";
-            alumnos3[1].Apellidos = "Sánchez";
-            alumnos3[1].Edad = 24;
+            alumnos3[1].Nombre = "María Jesus";
+            alumnos3[1].Apellidos = "Campos";
+            alumnos3[1].Edad = 22;
             Console.WriteLine(alumnos3[1].Nombre);
 
 
