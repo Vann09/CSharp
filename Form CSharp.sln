@@ -3,15 +3,44 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Review of CSharp Syntax", "1.Review of CSharp Syntax", "{1CF1301A-7DC7-4BDD-B95C-813538A9D534}"
-	ProjectSection(SolutionItems) = preProject
-		1.Review of CSharp Syntax\Formacion.CSharp.ConsolaApp1.csproj = 1.Review of CSharp Syntax\Formacion.CSharp.ConsolaApp1.csproj
-		1.Review of CSharp Syntax\Program.cs = 1.Review of CSharp Syntax\Program.cs
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Creating Methods, Handling Exceptions and Monitoring", "2.Creating Methods, Handling Exceptions and Monitoring", "{653DDAA4-FCDB-4F82-AA46-589556737CE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp.ConsoleApp2", "Formacion.CSharp.ConsoleApp2\Formacion.CSharp.ConsoleApp2.csproj", "{BFCB9C7A-ACF4-4515-922C-6997F479C15C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formacion.CSharp.ConsolaApp1", "Formacion.CSharp.ConsoleApp\Formacion.CSharp.ConsolaApp1.csproj", "{A964C1BF-F570-44DA-A595-37BDFE49C4B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Review of Visual CSharp Syntax", "1. Review of Visual CSharp Syntax", "{C3D2EC92-A7BE-4B57-A093-0C3877AFB440}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99.Extras", "99.Extras", "{A4EE950D-8384-4DEB-8509-C80FE46ED757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp.WebApplication1", "WebApplication1\Formacion.CSharp.WebApplication1.csproj", "{5FE8C296-0379-43FC-8744-BD105163B155}"
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFCB9C7A-ACF4-4515-922C-6997F479C15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFCB9C7A-ACF4-4515-922C-6997F479C15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFCB9C7A-ACF4-4515-922C-6997F479C15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFCB9C7A-ACF4-4515-922C-6997F479C15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A964C1BF-F570-44DA-A595-37BDFE49C4B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A964C1BF-F570-44DA-A595-37BDFE49C4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A964C1BF-F570-44DA-A595-37BDFE49C4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A964C1BF-F570-44DA-A595-37BDFE49C4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FE8C296-0379-43FC-8744-BD105163B155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FE8C296-0379-43FC-8744-BD105163B155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FE8C296-0379-43FC-8744-BD105163B155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FE8C296-0379-43FC-8744-BD105163B155}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFCB9C7A-ACF4-4515-922C-6997F479C15C} = {653DDAA4-FCDB-4F82-AA46-589556737CE4}
+		{A964C1BF-F570-44DA-A595-37BDFE49C4B4} = {C3D2EC92-A7BE-4B57-A093-0C3877AFB440}
+		{5FE8C296-0379-43FC-8744-BD105163B155} = {A4EE950D-8384-4DEB-8509-C80FE46ED757}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99E031E1-A57D-4E00-9DC5-878FECC5E4D0}
