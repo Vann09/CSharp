@@ -157,7 +157,7 @@ namespace Formacion.CSharp.ConsolaApp1
                 reserva.fumador = true;
             else reserva.fumador = false;
 
-            reserva.fumador = (respuesta2.ToLower().Trim() == "si" || respuesta2.ToLower().Trim() == "sí") ? true : false;
+            reserva.fumador = (respuesta2.ToLower().Trim() == "si" || respuesta2.ToLower().Trim() == "sí");
 
             switch (respuesta2.ToLower().Trim())
             {

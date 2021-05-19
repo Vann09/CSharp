@@ -6,6 +6,39 @@ namespace Formacion.CSharp.ConsoleApp2
     {
         static void Main(string[] args)
         {
+            try
+            {
+                int num = 10;
+                int num2 = 0;
+                
+                if (num2 == 0)
+                {
+                    throw new Exception("El valor de num2 es 0, no se puede dividir");
+                }
+                else 
+                {
+                    int res = num / num2;
+                    Console.WriteLine("El resultado es {0}", res);
+                }
+
+               
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("No se puede dividir entre 0");
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            finally 
+            {
+                Console.WriteLine("Bloque Finally");
+            }
+            
+            Console.ReadKey();
+            
             //Variable de tipo referencia. Objeto definido con Class
             var alumno = new Alumno() {Nombre = "Ana", Apellidos = "Diaz" };
             int a = 10;
