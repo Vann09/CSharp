@@ -497,3 +497,6 @@ namespace Formacion.CSharp.Objects
         public int tipo;
 
         public bool fumador;
+    }
+}
+

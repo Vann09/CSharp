@@ -163,7 +163,7 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             var precioMax1b = DataLists.ListaProductos.Max(r => r.Precio);
             var precioMax1c = (from r in DataLists.ListaProductos select r.Precio).Max();
 
-            //Conociendo el precio más alyo buscamos el producto coincidente
+            //Conociendo el precio más alto buscamos el producto coincidente
             var producto2a = DataLists.ListaProductos
                 .Where(r => r.Precio == precioMax1a)
                 .FirstOrDefault();
@@ -240,16 +240,28 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             Console.WriteLine(Environment.NewLine);
 
 
-            //Datos de los clientes con sus pedidos
+            //Pedidos agrupados por IdCliente. Retorna coleccion IGrouping
+            //La colección IGrouping tiene una Key (por la que agrupa) y un listado de registros asociados a la clave
             //Con Agrupación
             var data1 = DataLists.ListaPedidos
-                .GroupBy(r => r.IdCliente)
+                .GroupBy(r => r.IdCliente)          //<-- Especifico la Key por la cual se agrupan los registros de ListaPedidos
                 .ToList();
+
+            foreach (var c in data1)
+            {
+                Console.WriteLine($"Clave (IdCliente):{c.Key} ");
+                foreach (var l in c)
+                {
+                    Console.WriteLine($"-> {l.Id} - {l.FechaPedido.ToShortDateString()}");
+                }
+                Console.WriteLine("");
+            }
 
             //Con Agrupación, obteniendo los datos del cliente
             var data2 = DataLists.ListaPedidos
                 .GroupBy(r => r.IdCliente)
-                .Select(r => new {
+                .Select(r => new
+                {
                     r.Key,
                     totalPedidos = r.Count(),
                     pedidos = r,
@@ -260,56 +272,96 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             {
                 Console.WriteLine($"{c.cliente.Nombre} - {c.totalPedidos} pedidos.");
             }
+            Console.WriteLine("");
+
+            //Pedidos con el importe total de cada pedido
+            // 1.Agrupar lineas de pedido por IdPedido
+            var data3 = DataLists.ListaLineasPedido
+                .GroupBy(r => r.IdPedido)
+                .ToList();
+
+            foreach (var c in data3)
+            {
+                Console.WriteLine($"Clave (IdPedido): {c.Key} - Productos: {c.Count()}  Unidades: {c.Sum(r => r.Cantidad)} ");
+                foreach (var l in c)
+                {
+                    Console.WriteLine($"-> ID Producto: {l.IdProducto} - Cantidad: {l.Cantidad}");
+                }
+                Console.WriteLine("");
+            }
+            // 2.Descripcion y precio del producto
+            var data3b= DataLists.ListaLineasPedido
+                .GroupBy(r => r.IdPedido)
+                .Select(r=> new {})
+                .ToList();
+
+            //3.Mostrar IdPedido y Precio total
+            var data3c = DataLists.ListaLineasPedido
+                .GroupBy(r => r.IdPedido)
+                .Select(r => new
+                {
+                    r.Key,
+                    totalPedido = r.Sum (x =>
+                        x.Cantidad * DataLists.ListaProductos.Where(s => s.Id == x.IdProducto)
+                        .Select(p=>p.Precio)
+                        .FirstOrDefault())
+                }).ToList();
+
+            foreach (var c in data3c)
+            {
+                Console.WriteLine($"Clave (IdPedido): {c.Key} - Total: {c.totalPedido} ");
+            }
         }
-    }
 
-    /// <summary>
-    /// Representa el Objeto Cliente
-    /// </summary>
-    public class Cliente
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public DateTime FechaNac { get; set; }
-    }
+        
 
-    /// <summary>
-    /// Representa el Objeto Producto
-    /// </summary>
-    public class Producto
-    {
-        public int Id { get; set; }
-        public string Descripcion { get; set; }
-        public float Precio { get; set; }
-    }
+        /// <summary>
+        /// Representa el Objeto Cliente
+        /// </summary>
+        public class Cliente
+        {
+            public int Id { get; set; }
+            public string Nombre { get; set; }
+            public DateTime FechaNac { get; set; }
+        }
 
-    /// <summary>
-    /// Representa el Objeto Pedido
-    /// </summary>
-    public class Pedido
-    {
-        public int Id { get; set; }
-        public int IdCliente { get; set; }
-        public DateTime FechaPedido { get; set; }
-    }
+        /// <summary>
+        /// Representa el Objeto Producto
+        /// </summary>
+        public class Producto
+        {
+            public int Id { get; set; }
+            public string Descripcion { get; set; }
+            public float Precio { get; set; }
+        }
 
-    /// <summary>
-    /// Representa el Objeto Linea de Pedido
-    /// </summary>
-    public class LineaPedido
-    {
-        public int Id { get; set; }
-        public int IdPedido { get; set; }
-        public int IdProducto { get; set; }
-        public int Cantidad { get; set; }
-    }
+        /// <summary>
+        /// Representa el Objeto Pedido
+        /// </summary>
+        public class Pedido
+        {
+            public int Id { get; set; }
+            public int IdCliente { get; set; }
+            public DateTime FechaPedido { get; set; }
+        }
 
-    /// <summary>
-    /// Representa una Base de datos en memoria utilizando LIST
-    /// </summary>
-    public static class DataLists
-    {
-        private static List<Cliente> _listaClientes = new List<Cliente>() {
+        /// <summary>
+        /// Representa el Objeto Linea de Pedido
+        /// </summary>
+        public class LineaPedido
+        {
+            public int Id { get; set; }
+            public int IdPedido { get; set; }
+            public int IdProducto { get; set; }
+            public int Cantidad { get; set; }
+        }
+
+        /// <summary>
+        /// Representa una Base de datos en memoria utilizando LIST
+        /// </summary>
+        public static class DataLists
+        {
+            private static List<Cliente> _listaClientes = new List<Cliente>() {
             new Cliente { Id = 1,   Nombre = "Carlos Gonzalez Rodriguez",   FechaNac = new DateTime(1980, 10, 10) },
             new Cliente { Id = 2,   Nombre = "Luis Gomez Fernandez",        FechaNac = new DateTime(1961, 4, 20) },
             new Cliente { Id = 3,   Nombre = "Ana Lopez Diaz ",             FechaNac = new DateTime(1947, 1, 15) },
@@ -317,7 +369,7 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             new Cliente { Id = 5,   Nombre = "Lucia Garcia Sanchez",        FechaNac = new DateTime(1973, 11, 3) }
         };
 
-        private static List<Producto> _listaProductos = new List<Producto>()
+            private static List<Producto> _listaProductos = new List<Producto>()
         {
             new Producto { Id = 1,      Descripcion = "Boligrafo",          Precio = 0.35f },
             new Producto { Id = 2,      Descripcion = "Cuaderno grande",    Precio = 1.5f },
@@ -333,7 +385,7 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             new Producto { Id = 12,     Descripcion = "Grapas",             Precio = 0.90f }
         };
 
-        private static List<Pedido> _listaPedidos = new List<Pedido>()
+            private static List<Pedido> _listaPedidos = new List<Pedido>()
         {
             new Pedido { Id = 1,     IdCliente = 1,  FechaPedido = new DateTime(2013, 10, 1) },
             new Pedido { Id = 2,     IdCliente = 1,  FechaPedido = new DateTime(2013, 10, 8) },
@@ -349,7 +401,7 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             new Pedido { Id = 12,    IdCliente = 4,  FechaPedido = new DateTime(2013, 11, 11) }
         };
 
-        private static List<LineaPedido> _listaLineasPedido = new List<LineaPedido>()
+            private static List<LineaPedido> _listaLineasPedido = new List<LineaPedido>()
         {
             new LineaPedido() { Id = 1,  IdPedido = 1,  IdProducto = 1,     Cantidad = 9 },
             new LineaPedido() { Id = 2,  IdPedido = 1,  IdProducto = 3,     Cantidad = 7 },
@@ -378,10 +430,11 @@ namespace Formacion.CSharp.ConsoleAppLINQ
             new LineaPedido() { Id = 25, IdPedido = 12, IdProducto = 1,     Cantidad = 20 }
         };
 
-        // Propiedades de los elementos privados
-        public static List<Cliente> ListaClientes { get { return _listaClientes; } }
-        public static List<Producto> ListaProductos { get { return _listaProductos; } }
-        public static List<Pedido> ListaPedidos { get { return _listaPedidos; } }
-        public static List<LineaPedido> ListaLineasPedido { get { return _listaLineasPedido; } }
+            // Propiedades de los elementos privados
+            public static List<Cliente> ListaClientes { get { return _listaClientes; } }
+            public static List<Producto> ListaProductos { get { return _listaProductos; } }
+            public static List<Pedido> ListaPedidos { get { return _listaPedidos; } }
+            public static List<LineaPedido> ListaLineasPedido { get { return _listaLineasPedido; } }
+        }
     }
 }
