@@ -1,57 +1,120 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace DEMOS
+namespace Formacion.CSharp.ConsoleApp3
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Dictionary();
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("".PadRight(56, '*'));
+                Console.WriteLine("*  DEMO Y EJERCICIOS".PadRight(55) + "*");
+                Console.WriteLine("".PadRight(56, '*'));
+                Console.WriteLine("*".PadRight(55) + "*");
+                Console.WriteLine("*  1. Uso de ArrayList".PadRight(55) + "*");
+                Console.WriteLine("*  2. Uso de Hashtable".PadRight(55) + "*");
+                Console.WriteLine("*  3. Uso de List".PadRight(55) + "*");
+                Console.WriteLine("*  4. Uso de Dictionary".PadRight(55) + "*");
+                Console.WriteLine("*  9. Salir".PadRight(55) + "*");
+                Console.WriteLine("*".PadRight(55) + "*");
+                Console.WriteLine("".PadRight(56, '*'));
+
+                Console.WriteLine(Environment.NewLine);
+                Console.Write("   Opción: ");
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                int.TryParse(Console.ReadLine(), out int opcion);
+                switch (opcion)
+                {
+                    case 1:
+                        ArrayList();
+                        break;
+                    case 2:
+                        HashTable();
+                        break;
+                    case 3:
+                        List();
+                        break;
+                    case 4:
+                        Dictionary();
+                        break;
+                    case 9:
+                        return;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(Environment.NewLine + $"La opción {opcion} no es valida.");
+                        break;
+                }
+
+                Console.WriteLine(Environment.NewLine);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Pulsa una tecla para continuar...");
+                Console.ReadKey();
+            }
         }
 
-        static void ArrayList() 
+        /// <summary>
+        /// Uso de la lista, ArrayList
+        /// </summary>
+        static void ArrayList()
         {
+            //Instanciar
             var array = new ArrayList();
 
-            //Elimina todos los elementos de la colección
+            //Eliminar todos los elementos
             array.Clear();
 
-            //Añadir elementos a la colección
+            //Añadir elementos
             array.Add("azul");
             array.Add("rojo");
             array.Add("amarillo");
             array.Add("verde");
+            array.Add(96);
 
-            //Añadir todos los elemtos de otra colección
-            var colores = new string[] { "marrón", "naranja", "morado" };
+            //Añadir todos los elementos de otra colección
+            var colores = new string[] { "marrón", "naranja", "violeta" };
             array.AddRange(colores);
 
             //Número de elementos
             Console.WriteLine($"Número de items: {array.Count}");
 
-            //Recorrer elementos
+            //Recorrer colección
             foreach (var item in array)
             {
                 Console.WriteLine("Item: {0}", item);
             }
+            Console.WriteLine(Environment.NewLine);
+
             for (var i = 0; i < array.Count; i++)
             {
                 Console.WriteLine("Item: {0}", array[i]);
             }
 
-            //Eliminar un elemento de la colección
+            //Eliminar un elemento
             array.Remove("verde");
             array.RemoveAt(4);
+
+            //Eliminar elementos
             array.RemoveRange(2, 2);
+
         }
 
+        /// <summary>
+        /// Uso del diccionario, Hashtable
+        /// </summary>
         static void HashTable()
         {
+            //Instanciar
             var dicc = new Hashtable();
 
-            //Eliminar todos los elementos del diccionario
+            //Eliminar todos los elementos
             dicc.Clear();
 
             //Añadir elementos
@@ -59,33 +122,40 @@ namespace DEMOS
             dicc.Add("ANTON", "Antonio Sanz");
             dicc.Add("CARSA", "Carlos Sánchez");
 
-            //Recorrer elementos
-            foreach (var clave in dicc.Keys)
-            {
-                Console.WriteLine($"{clave}-> {dicc[clave]}");
-            }
-
-            //Mostrar el nº de elementos
+            //Número de elementos
             Console.WriteLine("Número de elementos {0}", dicc.Count);
 
-            //Eliminar un elemento
+            //Recorrer
+            foreach (var clave in dicc.Keys)
+            {
+                Console.WriteLine($"{clave} -> {dicc[clave]}");
+            }
+
+            //Eliminar un elemnto
             dicc.Remove("ANTON");
         }
-    
+
+        /// <summary>
+        /// Uso de la lista, List
+        /// </summary>
         static void List()
         {
+            //Instanciar
             var lista = new List<string>();
 
-
+            //Eliminar todos los elementos
             lista.Clear();
 
             //Añadir elementos
             lista.Add("azul");
+            lista.Add("rojo");
             lista.Add("verde");
             lista.Add("amarillo");
-            lista.Add("rojo");
-            lista.Add("negro");
-            lista.Add("Blanco");
+            lista.Add("rosa");
+            lista.Add("blanco");
+
+            //Número de elementos
+            Console.WriteLine("Número de elementos {0}", lista.Count);
 
             //Recorrer
             foreach (string item in lista)
@@ -93,39 +163,51 @@ namespace DEMOS
                 Console.WriteLine(item);
             }
 
-            //Mostrar el nº de elementos
-            Console.WriteLine("Número de elementos {0}", lista.Count);
+            for (var i = 0; i < lista.Count; i++)
+            {
+                Console.WriteLine("Item {0}: {1}", i, lista[i]);
+            }
 
-            //Eliminar elementos
+            //Eliminar un elemento
             lista.Remove("azul");
             lista.RemoveAt(4);
-            
-
-
         }
 
+        /// <summary>
+        /// Uso del diccionario, Dictionary
+        /// </summary>
         static void Dictionary()
         {
+            //Instanciar
             var dicc = new Dictionary<int, string>();
 
+            //Eliminar todos los elementos
             dicc.Clear();
 
+            //Añadir elementos
             dicc.Add(1, "azul");
             dicc.Add(2, "verde");
-            dicc.Add(10, "rojo");
-            dicc.Add(100, "amarillo");
-            dicc.Add(95, "rosa");
-            dicc.Add(80, "negro");
+            dicc.Add(99, "rojo");
+            dicc.Add(11, "amarillo");
+            dicc.Add(90, "rosa");
+            dicc.Add(410, "blanco");
 
+            //Número de elementos
             Console.WriteLine("Número de elementos {0}", dicc.Count);
 
+            //Recorrer
             foreach (var clave in dicc.Keys)
             {
                 Console.WriteLine("Clave: {0} - Valor: {1}", clave, dicc[clave]);
             }
 
+            for (var i = 0; i < dicc.Keys.Count; i++)
+            {
+                Console.WriteLine("Clave: {0} - Valor: {1}", dicc.Keys.ToList()[i], dicc[dicc.Keys.ToList()[i]]);
+            }
+
+            //Eliminar un elemento
             dicc.Remove(90);
         }
-    }   
-
+    }
 }

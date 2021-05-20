@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Formacion.CSharp.Objects;
 using System.Linq;
 
@@ -8,204 +9,66 @@ namespace Formacion.CSharp.ConsolaApp1
     {
         static void Main(string[] args)
         {
-
-            string[] frutas2 = { "naranja", "limón", "pomelo", "líma", "fresa", "sandía", "melón" };
-
-            int contador = 0;
-            while (contador < frutas2.Length)
-            {
-                Console.WriteLine($"{frutas2[contador]}");
-                contador++;
-            }
-            Console.WriteLine("");
-
-            contador = 0;
-            do
-            {
-                Console.WriteLine($"{frutas2[contador]}");
-                contador++;
-            } while (contador < frutas2.Length);
-            Console.WriteLine("");
-
-            contador = 0;
             while (true)
             {
-                Console.WriteLine($"{frutas2[contador]}");
-                contador++;
-                if (contador == frutas2.Length) break;
-                   
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("".PadRight(56, '*'));
+                Console.WriteLine("*  DEMO Y EJERCICIOS".PadRight(55) + "*");
+                Console.WriteLine("".PadRight(56, '*'));
+                Console.WriteLine("*".PadRight(55) + "*");
+                Console.WriteLine("*  1. Declaración de Variables".PadRight(55) + "*");
+                Console.WriteLine("*  2. Conversión de Variables".PadRight(55) + "*");
+                Console.WriteLine("*  3. Variables Númericas Nulleables".PadRight(55) + "*");
+                Console.WriteLine("*  4. Utilizando IF/ELSE y SWITCH".PadRight(55) + "*");
+                Console.WriteLine("*  5. Utilizando FOR, FOREACH, WHILE y DO/WHILE".PadRight(55) + "*");
+                Console.WriteLine("*  9. Salir".PadRight(55) + "*");
+                Console.WriteLine("*".PadRight(55) + "*");
+                Console.WriteLine("".PadRight(56, '*'));
+
+                Console.WriteLine(Environment.NewLine);
+                Console.Write("   Opción: ");
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                int.TryParse(Console.ReadLine(), out int opcion);
+                switch (opcion)
+                {
+                    case 1:
+                        DeclaracionVariables();
+                        break;
+                    case 2:
+                        ConversionVariables();
+                        break;
+                    case 3:
+                        VariablesNumericasNuleables();
+                        break;
+                    case 4:
+                        SentenciasDeControl();
+                        break;
+                    case 5:
+                        SentenciasDeControl2();
+                        break;
+                    case 9:
+                        return;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(Environment.NewLine + $"La opción {opcion} no es valida.");
+                        break;
+                }
+
+                Console.WriteLine(Environment.NewLine);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Pulsa una tecla para continuar...");
+                Console.ReadKey();
             }
+        }
 
-            Console.ReadKey();
-
-            bool testigo = false;
-            while (testigo == true)
-            {
-                Console.WriteLine("Se ejecuta el bloque de WHILE");
-            }
-
-            do
-            {
-                Console.WriteLine("Se ejecuta el bloque del DO/WHILE");
-            } while (testigo == true);
-
-            
-
-
-            
-            
-            string[] frutas = { "naranja", "limón", "pomelo", "líma" };
-            Object[] Objetos = { "naranja", 10, new Alumno(), new Reserva() };
-            decimal[] numeros3 = { 10, 5, 345, 55, 13, 1000, 83 };
-
-            //Recorremos las colecciones por posición
-            for (int i = 0; i < frutas.Length; i = i + 1)
-            {
-                Console.WriteLine($"En la posición {i}, la fruta es {frutas[i]}");
-            }
-
-            // Preguntamos un numero
-            // Tabla de multiplicar del numero
-            Console.Write("Introduce un nº: ");
-            int Mnum = int.Parse(Console.ReadLine());
-
-            Console.WriteLine($"Tabla de multiplicar de {Mnum}");
-            for (int n = 1; n < 11; n += 1)
-            {
-                Console.WriteLine($"{n} x {Mnum} = {n*Mnum}");
-            }
-         
-
-            // Suma total y media
-            // Max y Min
-            decimal suma = 0;
-            decimal max = 0;
-            decimal min = 10;
-
-            for (int e = 0; e < numeros3.Length; e += 1)
-            {
-                suma = suma + numeros3[e];
-                if (numeros3[e] > max) max = numeros3[e];
-                if (numeros3[e] < min) min = numeros3[e];
-
-            }
-            Console.WriteLine($"La suma total es {suma} y la media es {(suma/numeros3.Length)}");
-            Console.WriteLine($"El Max es {max} y el Min es {min}");
-            Console.WriteLine("");
-
-            suma = 0;
-            foreach (var n in numeros3)
-            {
-                suma += n;
-                if (min > max) max = n;
-                if (n < min) min = n;
-            }
-            Console.WriteLine($"La suma total es {suma} y la media es {(suma / numeros3.Length)}");
-            Console.WriteLine($"El Max es {max} y el Min es {min}");
-            Console.WriteLine("");
-
-            Console.WriteLine($"La suma total es {numeros3.Sum()} y la media es {numeros3.Average()}");
-            Console.WriteLine($"El Max es {numeros3.Max()} y el Min es {numeros3.Min()}");
-
-
-            //Recorremos una colección recuperando sus valores
-            foreach (string fruta in frutas)
-            {
-                Console.WriteLine($"Fruta: {fruta}");
-            }
-
-            foreach (var o in Objetos)
-            {
-                Console.WriteLine($"Tipo: {o.GetType().ToString()}");
-            }
-
-            foreach (decimal n in numeros3)
-            {
-                Console.WriteLine($"Num: {n}");
-            }
-
-            Reserva reserva = new Reserva();
-
-            Console.Write("ID de la Reserva: ");
-            reserva.id = Console.ReadLine();
-
-            Console.Write("Nombre del Cliente: ");
-            reserva.cliente = Console.ReadLine();
-
-            //100: Habitación individual  200: Habitación doble   300: Junior suite    400: Suite
-            Console.Write("Tipo de Reserva: ");
-            //reserva.tipo = Convert.ToInt32(Console.ReadLine());
-
-            string respuesta = Console.ReadLine();
-            int.TryParse(respuesta, out reserva.tipo);
-
-            Console.Write("Es Fumador ? ");
-            //reserva.fumador = Convert.ToBoolean(Console.ReadLine()); 
-
-            string respuesta2 = Console.ReadLine();
-            if (respuesta2.ToLower().Trim()== "si" || respuesta2.ToLower().Trim()== "sí")
-            {
-                reserva.fumador = true;
-            }
-            else 
-            {
-                reserva.fumador = false;
-            }
-
-
-            if (respuesta2.ToLower().Trim()== "si" || respuesta2.ToLower().Trim()== "sí")
-                reserva.fumador = true;
-            else reserva.fumador = false;
-
-            reserva.fumador = (respuesta2.ToLower().Trim() == "si" || respuesta2.ToLower().Trim() == "sí");
-
-            switch (respuesta2.ToLower().Trim())
-            {
-                case "si":
-                    reserva.fumador = true;
-                    break;
-                case "sí":
-                    reserva.fumador = true;
-                    break;
-                default:
-                    reserva.fumador = false;
-                    break;
-            }
-
-            Console.Clear();
-
-            //Pinta nº de reserva
-            Console.Write("ID Reserva:");
-            Console.WriteLine (reserva.id);
-
-            //Pinta nonmbre cliente
-            Console.WriteLine ("El nombre del cliente es " + reserva.cliente);
-
-            //Pinta tipo de reserva en texto
-            if (reserva.tipo == 100)
-                Console.WriteLine("Has reservado una habitación individual.");
-            else if (reserva.tipo == 200)
-                Console.WriteLine("Has reservado una habitación doble.");
-            else if (reserva.tipo == 300)
-                Console.WriteLine("Has reservado una junior suite.");
-            else if (reserva.tipo == 400)
-                Console.WriteLine("Has reservado una suite.");
-            else
-                Console.WriteLine("No has reservado una habitación.");
-
-            //Pinta si es fumador en texto
-            switch (reserva.fumador)
-            {
-                case true:
-                    Console.WriteLine ("El cliente es fumador.");
-                    break;
-                default:
-                    Console.WriteLine ("El cliente es no fumador.");
-                    break;
-            }
-
-
-
+        /// <summary>
+        /// Declaración de variables
+        /// </summary>
+        static void DeclaracionVariables()
+        {
             ///////////////////////////////////////////////////////////////
             //
             //  Declaración de variables
@@ -219,6 +82,7 @@ namespace Formacion.CSharp.ConsolaApp1
             string texto = "Hola Mundo !!!";
             string otroTexto;
             int numero = 10;
+            System.Int32 numero2 = 10;
             int otroNumero;
             decimal a, b, c;
 
@@ -233,16 +97,16 @@ namespace Formacion.CSharp.ConsolaApp1
             //Instanciamos un objeto y modificamos sus propiedades o variables
             Alumno alumno = new Alumno()
             {
-                Nombre = "David",
+                Nombre = "Julian",
                 Apellidos = "Sánchez",
-                Edad = 23
+                Edad = 24
             };
 
             //Instanciamos un objeto y modificamos sus propiedades o variables
             Alumno alumno1 = new Alumno();
-            alumno1.Nombre = "David";
-            alumno1.Apellidos = "Sánchez";
-            alumno1.Edad = 23;
+            alumno1.Nombre = "Julian";
+            alumno1.Nombre = "Sánchez";
+            alumno1.Edad = 24;
 
             //Instaciamos un objeto con VAR, OBJECT y DYNAMIC
             var alumno2 = new Alumno();
@@ -278,15 +142,20 @@ namespace Formacion.CSharp.ConsolaApp1
             Console.WriteLine(numeros2[5]);
 
             Alumno[] alumnos = new Alumno[20];
-            Alumno[] alumnos2 = { new Alumno() { Nombre = "David", Apellidos = "Sánchez", Edad = 23 }, new Alumno(), new Alumno() };
+            Alumno[] alumnos2 = { new Alumno() { Nombre = "Julian", Apellidos = "Sánchez", Edad = 24 }, new Alumno(), new Alumno() };
             Alumno[] alumnos3 = { new Alumno(), new Alumno(), new Alumno() };
 
-            alumnos3[1].Nombre = "María Jesus";
-            alumnos3[1].Apellidos = "Campos";
-            alumnos3[1].Edad = 22;
+            alumnos3[1].Nombre = "Ana María";
+            alumnos3[1].Apellidos = "Sánchez";
+            alumnos3[1].Edad = 24;
             Console.WriteLine(alumnos3[1].Nombre);
+        }
 
-
+        /// <summary>
+        /// Conversión de variables
+        /// </summary>
+        static void ConversionVariables()
+        {
             ///////////////////////////////////////////////////////////////
             //
             //  Conversión de variables
@@ -318,59 +187,313 @@ namespace Formacion.CSharp.ConsolaApp1
             //Conversión explicita utilizando el método TryParse
             byte.TryParse(num3, out num1);
 
+            int.TryParse(num3, out int num4);
+            var num5 = int.TryParse(num3, out _);
+
             Console.WriteLine("A: {0} - B: {1}", num1, num2);
+        }
 
+        /// <summary>
+        /// Variables númericas nuleables (que pueden contener Null)
+        /// </summary>
+        static void VariablesNumericasNuleables()
+        {
+            ///////////////////////////////////////////////////////////////
+            //
+            //  Variables númericas nuleables (que pueden contener Null)
+            //
+            ///////////////////////////////////////////////////////////////
 
-
+            //La variables númerica no puede almacenar Null
             int n1 = 10;
+
+            //Cuando añadimos ? al tipo, transformamos la variable en nuleable y puede contener Null
             int? n2 = null;
 
             int r1;
 
+            //La varibles nuleables son de un tipo diferente a las no nulebales
+            //Ejemplo: una variable INT es de un tipo diferente a una INT?
             r1 = n1;
             //r1 = n2;
-            r1 = (int)n2;
+            r1 = Convert.ToInt32(n2);
 
             if (n2 == null) r1 = 0;
-            else r1 = (int)n2;
+            else r1 = Convert.ToInt32(n2);
 
-            r1 = (n2 == null) ? r1 = 0 : r1 = (int)n2;
+            r1 = (n2 == null) ? r1 = 0 : r1 = Convert.ToInt32(n2);
+        }
+
+        /// <summary>
+        /// Sentencias de Control, uso de IF/ELSE y SWITCH
+        /// </summary>
+        static void SentenciasDeControl()
+        {
+            ///////////////////////////////////////////////////////////////
+            //
+            //  Sentencias de Control, uso de IF/ELSE y SWITCH
+            //
+            ///////////////////////////////////////////////////////////////
+
+            Reserva reserva = new Reserva();
+
+            Console.Write("ID de la Reserva: ");
+            reserva.id = Console.ReadLine();
+
+            Console.Write("Nombre del Cliente: ");
+            reserva.cliente = Console.ReadLine();
+
+            // 100: Habitación Individual   200: Habitación Doble   300: Junior Suite   400: Suite
+            Console.Write("Tipo de Reserva: ");
+            string respuesta = Console.ReadLine();
+            int.TryParse(respuesta, out reserva.tipo);      //Convertimos la respuesta de tipo string a int
+
+            //Preguntamos si el cliente es fumador y tenemos cuatro formas de asigna el valor a reserva.furmador
+            Console.Write("Es Fumador ? ");
+            string fumador = Console.ReadLine();
+
+            //Opción 1, utilizando IF/ELSE
+            if (fumador.ToLower().Trim() == "si" || fumador.ToLower().Trim() == "sí")
+            {
+                reserva.fumador = true;
+            }
+            else
+            {
+                reserva.fumador = false;
+            }
+
+            //Opción 2, utilizando IF/ELSE
+            if (fumador.ToLower().Trim() == "si" || fumador.ToLower().Trim() == "sí") reserva.fumador = true;
+            else reserva.fumador = false;
+
+            //Opción 3, utilizando condición ? :
+            reserva.fumador = (fumador.ToLower().Trim() == "si" || fumador.ToLower().Trim() == "sí") ? true : false;
+
+            //Opción 4, tulizando SWITCH
+            switch (fumador.ToLower().Trim())
+            {
+                case "si":
+                    reserva.fumador = true;
+                    break;
+                case "sí":
+                    reserva.fumador = true;
+                    break;
+                default:
+                    reserva.fumador = false;
+                    break;
+            }
+
+            Console.Clear();
+
+            //Pintar Número de la Reserva
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("ID Reserva:".PadRight(15, ' '));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(reserva.id);
+
+            //Pritar Nombre del Cliente
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Cliente:".PadRight(15, ' '));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(reserva.cliente);
+
+            //Pintar Tipo de Reserva en Texto utilizando SWITCH
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("ID Reserva:".PadRight(15, ' '));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            switch (reserva.tipo)
+            {
+                case 100:
+                    Console.WriteLine("Habitación Individual");
+                    break;
+                case 200:
+                    Console.WriteLine("Habitación Doble");
+                    break;
+                case 300:
+                    Console.WriteLine("Habitación Junior Suite");
+                    break;
+                case 400:
+                    Console.WriteLine("Habitación Suite");
+                    break;
+                default:
+                    Console.WriteLine($"{reserva.tipo}, desconocido");
+                    break;
+            }
+
+            //Pintar Tipo de Reserva en Texto utilizando IF/ELSE
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("ID Reserva:".PadRight(15, ' '));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            if (reserva.tipo == 100) Console.WriteLine("Habitación Individual");
+            else if (reserva.tipo == 200) Console.WriteLine("Habitación Doble");
+            else if (reserva.tipo == 300) Console.WriteLine("Habitación Junior Suite");
+            else if (reserva.tipo == 400) Console.WriteLine("Habitación Suite");
+            else Console.WriteLine($"{reserva.tipo}, desconocido");
 
 
+            //Pintar Si es fumador en Texto utilizando SWITCH
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Fumador:".PadRight(15, ' '));
+            switch (reserva.fumador)
+            {
+                case true:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Sí");
+                    break;
+                case false:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("No");
+                    break;
+            }
 
+            //Pintar Si es fumador en Texto utilizando ELSE/IF
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Fumador:".PadRight(15, ' '));
+
+            if (reserva.tipo == 100)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sí");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("No");
+            }
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Sentencias de Control, uso de FOR, FOREACH, WHILE y DO/WHILE
+        /// </summary>
+        static void SentenciasDeControl2()
+        {
+            ///////////////////////////////////////////////////////////////
+            //
+            //  Sentencias de Control, uso de FOR, FOREACH, WHILE y DO/WHILE
+            //
+            ///////////////////////////////////////////////////////////////
+
+            string[] frutas = { "naranja", "limón", "pomelo", "líma" };
+            Object[] objetos = { "naranja", 10, new Alumno(), new Reserva() };
+
+
+            //Recorremos las colecciones por posición
+            for (int i = 0; i < frutas.Length; i = i + 1)
+            {
+                Console.WriteLine($"En la posición {i}, la fruta {frutas[i]}");
+            }
+            Console.WriteLine("");
+
+            //Igual que anterior pero sin llaves de bloque (posible cuando el bloque solo tiene una sentencia)
+            for (int i = 0; i < frutas.Length; i++) Console.WriteLine($"En la posición {i}, la fruta {frutas[i]}");
+            Console.WriteLine("");
+
+            //Recorremos una colección, recuperando sus valores
+            foreach (string fruta in frutas)
+            {
+                Console.WriteLine($"Fruta: {fruta}");
+            }
+            Console.WriteLine("");
+
+            //Igual que anterior pero sin llaves de bloque (posible cuando el bloque solo tiene una sentencia)
+            foreach (string fruta in frutas) Console.WriteLine($"Fruta: {fruta}");
+            Console.WriteLine("");
+
+            foreach (var o in objetos)
+            {
+                Console.WriteLine($"Tipo: {o.GetType().ToString()}");
+            }
+            Console.WriteLine("");
+
+            //Recorremos la colección, utilizando WHILE
+            int contador = 0;
+            while (contador < frutas.Length)
+            {
+                Console.WriteLine($"En la posición {contador}, la fruta {frutas[contador]}");
+                contador++;
+            }
+            Console.WriteLine(Environment.NewLine);
+
+            //Recorremos la colección, utilizando DO/WHILE
+            contador = 0;
+            do
+            {
+                Console.WriteLine($"En la posición {contador}, la fruta {frutas[contador]}");
+                contador++;
+            } while (contador < frutas.Length);
+            Console.WriteLine(Environment.NewLine);
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            decimal[] numeros = { 10, 5, 345, 55, 13, 1000, 83 };
+
+            //Recorremos las colecciones por posición y buscamos la suma de todos los elementos, la media, el mayor valor, y el menor valor
+            decimal suma = 0;
+            decimal max = 0;
+            decimal min = numeros[0];
+            for (int i = 0; i < numeros.Length; i = i + 1)
+            {
+                suma = suma + numeros[i];
+                if (numeros[i] > max) max = numeros[i];
+                if (numeros[i] < min) min = numeros[i];
+            }
+            Console.WriteLine($"Suma total: {suma}");
+            Console.WriteLine($"Media: {(suma / numeros.Length).ToString("N2")}");
+            Console.WriteLine($"Mayor: {max}");
+            Console.WriteLine($"Menor: {min}");
+            Console.WriteLine("");
+
+            //Repetimos el ejercicio utilizando un FOREACH
+            suma = 0;
+            foreach (var num in numeros)
+            {
+                suma += num;
+                if (min > max) max = num;
+                if (num < min) min = num;
+            }
+            Console.WriteLine($"Suma total: {suma}");
+            Console.WriteLine($"Media: {(suma / numeros.Length).ToString("N2")}");
+            Console.WriteLine($"Mayor: {max}");
+            Console.WriteLine($"Menor: {min}");
+            Console.WriteLine("");
+
+
+            //En ejemplo de como obtener la misma información con método de LINQ
+            Console.WriteLine($"Suma total: {numeros.Sum()}");
+            Console.WriteLine($"Media: {numeros.Average().ToString("N2")}");
+            Console.WriteLine($"Mayor: {numeros.Max()}");
+            Console.WriteLine($"Menor: {numeros.Min()}");
+            Console.WriteLine("");
         }
     }
 }
 
 namespace Formacion.CSharp.Objects
 {
+    /// <summary>
+    /// Objeto Alumno para los ejercicios de demostración
+    /// </summary>
     public class Alumno
     {
-        public string Nombre = "Jose";
-        public string Apellidos = "Izquierdo";
-        public int Edad = 27;
-
-        public void Funcion()
-        { }
+        public string Nombre;
+        public string Apellidos;
+        public int Edad;
     }
 
+    /// <summary>
+    /// Objeto Reserva para los ejercicios de demostración
+    /// </summary>
     public class Reserva
     {
         public string id;
+
         public string cliente;
 
-        //100: Habitación individual  200: Habitación doble   300: Junior suite    400: Suite
+        // 100: Habitación Individual   200: Habitación Doble   300: Junior Suite   400: Suite
         public int tipo;
-        public bool fumador;
-    }
-}
 
-namespace Universidad
-{
-    class Alumno
-    {
-        string Nombre;
-        string Apellidos;
-        int Edad;
-    }
-}
+        public bool fumador;

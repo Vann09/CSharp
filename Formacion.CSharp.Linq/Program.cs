@@ -2,205 +2,270 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Formacion.CSharp.ConsoleAppLinq
+namespace Formacion.CSharp.ConsoleAppLINQ
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //Escribe el método del ejemplo que quieres probar
+            Agrupaciones();
+        }
 
+        /// <summary>
+        /// Busquedas básicas con LINQ
+        /// </summary>
+        static void BusquedasBasicas()
+        {
+            //Equivalente a: SELECT * FROM ListaProductos
 
-            //Agrupaciones
-            var data = DataLists.ListaPedidos
-                .GroupBy(r => r.IdCliente)
-                .Select(r => new {
-                    r.Key, 
-                    TotalPedidos = 
-                    r.Count(),
-                    lineas = r,
-                    cliente = DataLists.ListaClientes.Where(s => s.Id == r.Key).FirstOrDefault()
-                })
+            var resultado1a = DataLists.ListaProductos
                 .ToList();
 
-            foreach (var item in data)
+            var resultado1b = from r in DataLists.ListaProductos
+                              select r;
+
+
+            //Equivalente a: SELECT * FROM ListaProductos WHERE precio > 2
+
+            var resultado2a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .ToList();
+
+            var resultado2b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              select r;
+
+
+            //Equivalente a: SELECT * FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
+
+            var resultado3a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .OrderByDescending(x => x.Precio)
+                .ToList();
+
+            var resultado3b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              orderby r.Precio descending
+                              select r;
+
+
+            //Equivalente a: SELECT Descripcion, Precio FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
+            var resultado4a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .OrderByDescending(x => x.Precio)
+                .Select(x => new { x.Descripcion, x.Precio })
+                .ToList();
+
+            var resultado4b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              orderby r.Precio descending
+                              select new { r.Descripcion, r.Precio };
+
+            foreach (var item in resultado1a)
             {
-                Console.WriteLine($"{item.cliente.Nombre} - Total Pedido:{item.TotalPedidos} Cliente: {item.Key}");
-                foreach (var l in item.lineas)
-                {
-                    Console.WriteLine($"--> {l.Id} - {l.FechaPedido.ToString()}");
-                }
+                Console.WriteLine($"{item.Descripcion}  {item.Precio}");
             }
+        }
+
+        static void Busquedas()
+        {
+            //Productos con precio superior a 2
+
+            //Equivalente a: SELECT * FROM ListaProductos WHERE precio > 2
+            var resultado1a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .ToList();
+
+            var resultado1b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              select r;
 
 
-            foreach ( var item in DataLists.ListaPedidos.ToList())
+            //Equivalente a: SELECT * FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
+            var resultado2a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .OrderByDescending(x => x.Precio)
+                .ToList();
+
+            var resultado2b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              orderby r.Precio descending
+                              select r;
+
+            //Equivalente a: SELECT Descripcion, Precio FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
+            var resultado3a = DataLists.ListaProductos
+                .Where(x => x.Precio > 2)
+                .OrderByDescending(x => x.Precio)
+                .Select(x => new { x.Descripcion, x.Precio })
+                .ToList();
+
+            var resultado3b = from r in DataLists.ListaProductos
+                              where r.Precio > 2
+                              orderby r.Precio descending
+                              select new { r.Descripcion, r.Precio };
+
+
+            foreach (var item in resultado1a)
             {
-                Console.WriteLine ( $"Pedido: {item.Id} Cliente: {item.IdCliente}");
-                 
+                Console.WriteLine($"{item.Descripcion}  {item.Precio}");
             }
+        }
 
-            //Datos del Cliente + Nº de Pedidos
+        static void Busquedas2()
+        {
+            //Clientes nacidos entre 1980 y 1990
+
+            //La base de datos nos retorna la lista de clientes y luego los contamos
+            var clientes1 = DataLists.ListaClientes
+                .Where(x => x.FechaNac.Year >= 1980 && x.FechaNac.Year <= 1990)
+                .ToList().Count;
+
+            //La base de datos nos retorna el número de clientes
+            var clientes2 = DataLists.ListaClientes
+                .Where(x => x.FechaNac.Year >= 1980 && x.FechaNac.Year <= 1990)
+                .Count();
+
+            //La base de datos nos retorna el número de clientes
+            var clientes3 = DataLists.ListaClientes
+                .Count(x => x.FechaNac.Year >= 1980 && x.FechaNac.Year <= 1990);
+
+            //La base de datos nos retorna la lista de clientes y luego los contamos
+            var clients = (from c in DataLists.ListaClientes
+                           where c.FechaNac.Year >= 1980 && c.FechaNac.Year <= 1990
+                           select c).ToList().Count;
+
+            //La base de datos nos retorna el número de clientes
+            var clients2 = (from c in DataLists.ListaClientes
+                            where c.FechaNac.Year >= 1980 && c.FechaNac.Year <= 1990
+                            select c).Count();
+        }
+
+        static void Busquedas3()
+        {
+            //El producto de mayor precio
+
+            //Ordenamos por precio descedente y nos quedamos con el primer elemento
+            var productoA = DataLists.ListaProductos
+                    .OrderByDescending(r => r.Precio)
+                    .FirstOrDefault();
+
+            var productoB = (from r in DataLists.ListaProductos
+                             orderby r.Precio descending
+                             select r).FirstOrDefault();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //Buscamos el precio más alto
+            var precioMax1a = DataLists.ListaProductos.Select(r => r.Precio).Max();
+            var precioMax1b = DataLists.ListaProductos.Max(r => r.Precio);
+            var precioMax1c = (from r in DataLists.ListaProductos select r.Precio).Max();
+
+            //Conociendo el precio más alyo buscamos el producto coincidente
+            var producto2a = DataLists.ListaProductos
+                .Where(r => r.Precio == precioMax1a)
+                .FirstOrDefault();
+
+            var producto2b = from r in DataLists.ListaProductos
+                             where r.Precio == precioMax1a
+                             select r;
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //Incluimos en la búsqueda del producto la del precio máximo
+            var producto3a = DataLists.ListaProductos
+                .Where(r => r.Precio == DataLists.ListaProductos.Select(r => r.Precio).Max())
+                .FirstOrDefault();
+
+            var producto3b = DataLists.ListaProductos
+                .Where(r => r.Precio == DataLists.ListaProductos.Max(r => r.Precio))
+                .FirstOrDefault();
+
+            var producto3c = (from r in DataLists.ListaProductos
+                              where r.Precio == (from s in DataLists.ListaProductos select s.Precio).Max()
+                              select r).FirstOrDefault();
+
+
+            Console.WriteLine($"{productoA.Id}#  {productoA.Descripcion}  {productoA.Precio}");
+        }
+
+        static void Busquedas4()
+        {
+            //Producto que contenga en descripción la palabra cuaderno
+            var r1a = DataLists.ListaProductos
+               .Where(r => r.Descripcion.Contains("cuaderno"))
+               .ToList();
+
+            var r1b = from c in DataLists.ListaProductos
+                      where c.Descripcion.Contains("cuaderno")
+                      select c;
+
+
+            //Producto que descripción comience por la palabra cuaderno
+            var r2a = DataLists.ListaProductos
+                .Where(r => r.Descripcion.StartsWith("cuaderno"))
+                .ToList();
+
+            var r2b = from c in DataLists.ListaProductos
+                      where c.Descripcion.StartsWith("cuaderno")
+                      select c;
+
+
+            //Producto que descripción finalice por la palabra cuaderno
+            var r3a = DataLists.ListaProductos
+                .Where(r => r.Descripcion.EndsWith("cuaderno"))
+                .ToList();
+
+            var r3b = from c in DataLists.ListaProductos
+                      where c.Descripcion.EndsWith("cuaderno")
+                      select c;
+        }
+
+        static void Agrupaciones()
+        {
+            //Datos de los clientes con sus pedidos
+            //Sin Agrupación
             foreach (var c in DataLists.ListaClientes.ToList())
             {
-               var numPedidos = DataLists.ListaPedidos
+                int numPedidos = DataLists.ListaPedidos
                     .Where(r => r.IdCliente == c.Id)
                     .Count();
 
                 Console.WriteLine($"{c.Nombre} - {numPedidos} pedidos.");
             }
-
-            Console.ReadLine();
-
-
-            //Listado de Productos Cuaderno
-            var productos = DataLists.ListaProductos
-                .Where(r => r.Descripcion.ToLower().StartsWith("cuaderno"))
-                .ToList();
-
-            var products = from r in DataLists.ListaProductos
-                           where r.Descripcion.ToLower().Contains("cuaderno")
-                           select r;
-
-            foreach (var item in productos)
-            {
-                Console.WriteLine($"{item.Id} {item.Descripcion} {item.Precio}");
-            }
-
-            Console.ReadKey();
-
-            //El producto de mayor precio
-            var producto = DataLists.ListaProductos
-                .OrderByDescending(r => r.Precio)
-                .FirstOrDefault();
-
-            var precioMax = DataLists.ListaProductos
-                .Select(r => r.Precio)
-                .Max();
-
-            var precioMax2 = DataLists.ListaProductos
-                .Max(r => r.Precio);
-
-            var producto2 = DataLists.ListaProductos
-                .Where(r => r.Precio == precioMax )
-                .FirstOrDefault();
-
-            var producto3 = DataLists.ListaProductos
-                .Where(r => r.Precio == DataLists.ListaProductos.Select(r => r.Precio).Max())
-               .FirstOrDefault();
-
-            var producto4 = DataLists.ListaProductos
-                .Where(r => r.Precio == DataLists.ListaProductos.Max(r => r.Precio))
-                .FirstOrDefault();
-
-            var product = (from r in DataLists.ListaProductos
-                            orderby r.Precio descending
-                            select r).FirstOrDefault();
-
-            Console.WriteLine($"{producto.Id} {producto.Descripcion} {producto.Precio}");
-            
-
-
-            Console.ReadKey();
-
-            
-
-            //Lista completa de Clientes
-            //Cliente con ID igual a 2
-            //Cuantos ? Nacidos entre 1980 y 1990
-
-            var clientes = (from l in DataLists.ListaClientes
-                           where 1980 <= l.FechaNac.Year && l.FechaNac.Year <= 1990
-                           select l).Count();
-
-            Console.Write(clientes);
-
-            var clients = DataLists.ListaClientes
-                .Where(x => x.FechaNac.Year >= 1980 && x.FechaNac.Year <= 1990)
-                .ToList().Count;
-
-            
-            //foreach (var cliente in clientes)
-            {
-                //Console.WriteLine($"{cliente.Id} {cliente.Nombre} {cliente.FechaNac.ToShortDateString()}");
-            }
-
-
-
-            Console.ReadKey();
-
-            //Buscar productos con precio superior a 2
-            foreach (var item in DataLists.ListaProductos)
-            {
-                if (item.Precio > 2) Console.WriteLine($"{item.Descripcion} {item.Precio}");
-            }
             Console.WriteLine(Environment.NewLine);
 
-            // Métodos de LINQ /////////
 
-            //SELECT * FROM ListaProductos
-            var resul = DataLists.ListaProductos
+            //Datos de los clientes con sus pedidos
+            //Con Agrupación
+            var data1 = DataLists.ListaPedidos
+                .GroupBy(r => r.IdCliente)
                 .ToList();
 
-            //SELECT * FROM ListaProductos WHERE precio > 2
-            var resul1 = DataLists.ListaProductos
-                .Where(x => x.Precio > 2)
-                .ToList();
+            //Con Agrupación, obteniendo los datos del cliente
+            var data2 = DataLists.ListaPedidos
+                .GroupBy(r => r.IdCliente)
+                .Select(r => new {
+                    r.Key,
+                    totalPedidos = r.Count(),
+                    pedidos = r,
+                    cliente = DataLists.ListaClientes.Where(s => s.Id == r.Key).FirstOrDefault()
+                }).ToList();
 
-            //SELECT* FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
-            var resul2 = DataLists.ListaProductos
-                .Where(x => x.Precio > 2)
-                .OrderByDescending(x => x.Precio)
-                .ToList();
-
-            //SELECT Descripcion, Precio FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
-            var resul3 = DataLists.ListaProductos
-                .Where(x => x.Precio > 2)
-                .OrderByDescending(x => x.Precio)
-                .Select(x => new {x.Descripcion, x.Precio})
-                .ToList();
-
-
-            foreach (var item in resul3)
+            foreach (var c in data2)
             {
-                Console.WriteLine($"{item.Descripcion} {item.Precio}");
+                Console.WriteLine($"{c.cliente.Nombre} - {c.totalPedidos} pedidos.");
             }
-
-            Console.ReadKey();
-            
-            // Expresion de LINQ //////////////
-
-            //SELECT * FROM ListaProductos
-            var resultado = from r in DataLists.ListaProductos
-                            select r;
-
-            //SELECT * FROM ListaProductos WHERE precio > 2
-            var resultado1 = from r in DataLists.ListaProductos
-                             where r.Precio > 2
-                             select r;
-            
-            //SELECT * FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
-            var resultado2 = from r in DataLists.ListaProductos
-                             where r.Precio > 2
-                             orderby r.Precio descending
-                             select r;
-
-            //SELECT Descripcion, Precio FROM ListaProductos WHERE precio > 2 ORDER BY precio DESC
-            var resultado3 = from r in DataLists.ListaProductos
-                             where r.Precio > 2
-                             orderby r.Precio descending
-                             select new {r.Descripcion, r.Precio };
-
-            foreach (var item in resultado3)
-            {
-                Console.WriteLine($"{item.Descripcion} {item.Precio}");
-            }
-
-            Console.ReadKey();
-
-
         }
-
     }
 
+    /// <summary>
+    /// Representa el Objeto Cliente
+    /// </summary>
     public class Cliente
     {
         public int Id { get; set; }
@@ -208,6 +273,9 @@ namespace Formacion.CSharp.ConsoleAppLinq
         public DateTime FechaNac { get; set; }
     }
 
+    /// <summary>
+    /// Representa el Objeto Producto
+    /// </summary>
     public class Producto
     {
         public int Id { get; set; }
@@ -215,6 +283,9 @@ namespace Formacion.CSharp.ConsoleAppLinq
         public float Precio { get; set; }
     }
 
+    /// <summary>
+    /// Representa el Objeto Pedido
+    /// </summary>
     public class Pedido
     {
         public int Id { get; set; }
@@ -222,6 +293,9 @@ namespace Formacion.CSharp.ConsoleAppLinq
         public DateTime FechaPedido { get; set; }
     }
 
+    /// <summary>
+    /// Representa el Objeto Linea de Pedido
+    /// </summary>
     public class LineaPedido
     {
         public int Id { get; set; }
@@ -230,6 +304,9 @@ namespace Formacion.CSharp.ConsoleAppLinq
         public int Cantidad { get; set; }
     }
 
+    /// <summary>
+    /// Representa una Base de datos en memoria utilizando LIST
+    /// </summary>
     public static class DataLists
     {
         private static List<Cliente> _listaClientes = new List<Cliente>() {
