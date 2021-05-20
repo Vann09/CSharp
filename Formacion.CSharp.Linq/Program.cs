@@ -289,14 +289,35 @@ namespace Formacion.CSharp.ConsoleAppLINQ
                 }
                 Console.WriteLine("");
             }
+
             // 2.Descripcion y precio del producto
             var data3b= DataLists.ListaLineasPedido
                 .GroupBy(r => r.IdPedido)
-                .Select(r=> new {})
+                .Select(r => new {
+                    r.Key,
+                    numLineas = r.Count(),
+                    unidades = r.Sum(s => s.Cantidad),
+                    lineas = r,
+                    pedido = DataLists.ListaPedidos.Where(s => s.Id == r.Key).FirstOrDefault(),
+                    lineasExt = r.Select(x => new {
+                        linea = x,
+                        producto = DataLists.ListaProductos.Where(s => s.Id == x.IdProducto).FirstOrDefault()
+                    })
+                })
                 .ToList();
 
-            //3.Mostrar IdPedido y Precio total
-            var data3c = DataLists.ListaLineasPedido
+            foreach (var c in data3b)
+            {
+                Console.WriteLine($"Clave (IdPedido): {c.Key} - Lineas del Pedido: {c.lineas.Count()} Unidades: {c.lineas.Sum(r => r.Cantidad)}");
+                foreach (var l in c.lineasExt)
+                {
+                    Console.WriteLine($" -> {l.producto.Id}# {l.producto.Descripcion} - Precio: {l.producto.Precio} - Cantidad: {l.linea.Cantidad}");
+                }
+                Console.WriteLine("");
+            }
+
+                //3.Mostrar IdPedido y Precio total
+                var data3c = DataLists.ListaLineasPedido
                 .GroupBy(r => r.IdPedido)
                 .Select(r => new
                 {
