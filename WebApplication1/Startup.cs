@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using NorthWind.Models;
 
 namespace Formacion.CSharp.WebApplication1
 {
@@ -24,6 +26,8 @@ namespace Formacion.CSharp.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ModelNorthwind>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("NorthWind")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
