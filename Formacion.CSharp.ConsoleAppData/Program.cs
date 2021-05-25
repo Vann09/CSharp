@@ -75,71 +75,13 @@ namespace Formacion.CSharp.ConsoleAppData
 
         static void TrabajandoConEF()
         {
+            //EntityFramework (manejamos las base de datos como colecciones)
+
             var db = new ModelNorthwind();
-
-            //EntityFramework (manejamos las BD como colecciones)
-
-            /* Eliminar Datos - DELETE
-             * Equivalente a: DELETE Customers WHERE CustomerID == "DEMO1"*/
-
-            //Elimina el registro con CustomerID igual a DEMO1
-            //db.Customers.Remove(db.Customers.Where(r => r.CustomerID == "DEMO1").FirstOrDefault());
-
-            // Elimina todos los registros donde País es igual a España
-            //db.Customers.RemoveRange(db.Customers.Where(r => r.Country == "Spain").ToList());
-
-            var clientes3a = db.Customers
-                .Where(r => r.CustomerID == "DEMO1")
-                .FirstOrDefault();
-
-            db.Customers.Remove(clientes3a);
-            db.SaveChanges();
-           
-            /* Modificar Datos - UPDATE
-             * Equivalente a: UPDATE Customers SET CompanyName = 'nuevo valor' WHERE CustomerID == "DEMO1"  */
-
-            var clientes2a = db.Customers
-                .Where(r => r.CustomerID == "DEMO1")
-                .FirstOrDefault();
-
-            clientes2a.CompanyName = "Empresa Uno Dos, SL";
-            clientes2a.PostalCode = "28923";
-
-            var clientes2b = (from c in db.Customers
-                             where c.CustomerID == "DEMO1"
-                             select c).FirstOrDefault();
-            
-            clientes2b.CompanyName = "Empresa Uno Dos, SL";
-            clientes2a.PostalCode = "28923";
-
-            db.SaveChanges();
-
-
-            /* Insertar Datos - INSERT
-             * Equivalente a: INSERT INTO Customers Value (...,...)*/
-
-            var cliente = new Customers();
-            cliente.CustomerID = "DEMO1";
-            cliente.CompanyName = "Empresa Uno, SL";
-            cliente.ContactName = " Jose Izquierdo";
-            cliente.ContactTitle = "Gerente";
-            cliente.Address = "C/ Desengaño, 21";
-            cliente.PostalCode = "28792";
-            cliente.City = "Madrid";
-            cliente.Country = "Spain";
-            cliente.Phone = "910 000 000";
-            cliente.Fax = "910 000 001";
-
-            db.Customers.Add(cliente);
-            db.SaveChanges();
-               
-
 
 
             //Consulta de Datos - SELECT
             //Equivalente a: SELECT * FROM Customers
-
-
 
             var clientes = db.Customers
                 .ToList();
@@ -157,15 +99,70 @@ namespace Formacion.CSharp.ConsoleAppData
                             orderby c.City
                             select c;
 
-            foreach (var cliente3 in clientes)
+            foreach (var c in clientes3)
             {
-                Console.WriteLine($"ID: {cliente3.CustomerID}");
-                Console.WriteLine($"Empresa: {cliente3.CompanyName}");
-                Console.WriteLine($"País: {cliente3.Country}" + Environment.NewLine);
+                Console.WriteLine($"ID: {c.CustomerID}");
+                Console.WriteLine($"Empresa: {c.CompanyName}");
+                Console.WriteLine($"Pais: {c.Country}" + Environment.NewLine);
             }
 
-            
 
+            //Insertar Datos - INSERT
+            //Equivalente a: INSERT INTO Customers VALUES(..., ..., )
+
+            var cliente = new Customers();
+
+            cliente.CustomerID = "DEMO1";
+            cliente.CompanyName = "Empresa Uno, SL";
+            cliente.ContactName = "Jose Izquierdo";
+            cliente.ContactTitle = "Gerente";
+            cliente.Address = "Avenida del Desengaño, 10";
+            cliente.PostalCode = "28010";
+            cliente.City = "Madrid";
+            cliente.Country = "Spain";
+            cliente.Phone = "910 000 001";
+            cliente.Fax = "910 000 002";
+
+            db.Customers.Add(cliente);
+            db.SaveChanges();
+
+
+            //Modificar Datos - UPDATE
+            //Equivalente a: UPDATE Customers SET CompanyName = 'nuevo valor' WHERE CustomerID = 'DEMO1'
+
+            var cliente2a = db.Customers
+                .Where(r => r.CustomerID == "DEMO1")
+                .FirstOrDefault();
+
+            cliente2a.CompanyName = "Empresa Uno Dos y Tres, SL";
+            cliente2a.PostalCode = "28014";
+
+
+            var cliente2b = (from c in db.Customers
+                             where c.CustomerID == "DEMO1"
+                             select c).FirstOrDefault();
+
+            cliente2b.CompanyName = "Empresa Uno Dos y Tres, SL";
+            cliente2b.PostalCode = "28014";
+
+            db.SaveChanges();
+
+
+            //Eliminar Datos - DELETE
+            //Equivalente a: DELETE Customers WHERE CustomerID = 'DEMO1'
+
+            //Elimina el registro con CustomerID igual a DEMO1
+            //db.Customers.Remove(context.Customers.Where(r => r.CustomerID == "DEMO1").FirstOrDefault());
+
+            //Elimina todos los registros donde País es igual a Spain
+            //db.Customers.RemoveRange(context.Customers.Where(r => r.Country == "Spain").ToList());
+
+            var cliente3a = db.Customers
+                .Where(r => r.CustomerID == "DEMO1")
+                .FirstOrDefault();
+
+            db.Customers.Remove(cliente3a);
+            db.SaveChanges();
         }
 
         static void TrabajandoConEFInclude()
@@ -203,10 +200,6 @@ namespace Formacion.CSharp.ConsoleAppData
             {
                 Console.WriteLine("Pedido núm: {0}", p.OrderID);
             }
-                         
-             
-
-
         }
     }
 

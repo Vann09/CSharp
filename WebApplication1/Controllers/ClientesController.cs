@@ -25,6 +25,7 @@ namespace Formacion.CSharp.WebApplication1.Controllers
             var cliente = context.Customers
                 .Where (r => r.CustomerID == id)
                 .FirstOrDefault();
+
             ViewBag.Title = $"Ficha de {cliente.CompanyName}";
 
             return View(cliente);
@@ -38,6 +39,7 @@ namespace Formacion.CSharp.WebApplication1.Controllers
 
             return RedirectToAction("Ficha", new { id = cliente.CustomerID});
             //return View("Ficha", cliente);
+            //return RedirectToAction("Index");
         }
 
 
