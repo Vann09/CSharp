@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp.ConsoleApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServicioNorthwind", "MicroServicioNorthwind\MicroServicioNorthwind.csproj", "{0EE78807-3A3F-48C9-B995-6E3DA4893CEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AA_Ejercicios CSharp", "AA_Ejercicios CSharp", "{C1B72F4D-3593-43AB-BCFB-AA25CBC01A99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1A.Ejercicios.ConsoleApp", "1A.Ejercicios.ConsoleApp\1A.Ejercicios.ConsoleApp.csproj", "{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,10 @@ Global
 		{0EE78807-3A3F-48C9-B995-6E3DA4893CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EE78807-3A3F-48C9-B995-6E3DA4893CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EE78807-3A3F-48C9-B995-6E3DA4893CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,7 @@ Global
 		{DBF8B4A3-425D-4162-9280-3517E7B616A0} = {2D3CA924-0CBA-4D06-9829-0B40F74EDAD6}
 		{924210D9-D3C6-4120-804C-111CB4543BDA} = {3F23D274-4FC7-4471-931F-A0318E045072}
 		{0EE78807-3A3F-48C9-B995-6E3DA4893CEC} = {3F23D274-4FC7-4471-931F-A0318E045072}
+		{A804DF03-FCF1-4E2D-ADE4-5CEB4B0DAD25} = {C1B72F4D-3593-43AB-BCFB-AA25CBC01A99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99E031E1-A57D-4E00-9DC5-878FECC5E4D0}
