@@ -39,8 +39,8 @@ namespace Formacion.CSharp.ConsoleApp2
         /// <param name="numero">Representa un número entero que es de tipo valor, se comporta como de referencia cuando añadimos ref</param>
         static void Transformar(Alumno a, ref int numero)
         {
-            a.Nombre = "Borja";
-            a.Apellidos = "Cabeza";
+            a.Nombre = "Jose";
+            a.Apellidos = "Izquierdo";
             numero = 1100;
         }
 
