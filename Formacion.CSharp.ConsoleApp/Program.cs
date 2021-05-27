@@ -291,7 +291,7 @@ namespace Formacion.CSharp.ConsolaApp1
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(reserva.id);
 
-            //Pritar Nombre del Cliente
+            //Pintar Nombre del Cliente
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Cliente:".PadRight(15, ' '));
             Console.ForegroundColor = ConsoleColor.Yellow;

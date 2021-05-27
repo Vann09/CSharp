@@ -10,7 +10,7 @@ namespace _1A.Ejercicios.ConsoleApp
        
         static void Main(string[] args)
         {
-            Numero();
+            Adivinanza();
         }
 
         static void Saludo()
@@ -47,7 +47,49 @@ namespace _1A.Ejercicios.ConsoleApp
 
         }   
 
+        static void Array()
+        {
+            //C1.Muestra el número de elementos de ***lista * **
+            string[] lista = { "T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E" };
+            Console.WriteLine($"Hay {lista.Length} elementos en la lista.");
 
+            //C2. Muestra el primer y el último elemento de ***lista***
+            Console.WriteLine($"El primer elemento de la lista es {lista[0]} y el último {lista[22]}");
+
+        }
+
+        static void Dni()
+        {
+            string[] lista = { "T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E" };
+            //D1. Pregunta al operador su DNI sin letra.
+            Console.WriteLine("Dime tu DNI sin la letra: ");
+            var dni = Console.ReadLine();
+            if (dni.Length == 8)
+            {
+                //D2. Calcula el resto de dividir el número del DNI entre 23.
+                var letra = Convert.ToInt32(dni) % 23;
+
+                //D3. Muestra el DNI con la letra. El resto de la división representa la posición de la letra del DNI en ***lista***.
+                Console.WriteLine($"La letra del DNI es {lista[letra]} y el DNI completo es {dni}-{lista[letra]}");
+            }
+            else Console.WriteLine("El DNI introducido no es válido.");
+
+
+        }
+
+        static void Adivinanza()
+        {
+            //E1. Pregunta un número al operador y muestra el mensaje los siguientes mensajes:
+            int numero = 100;
+            Console.WriteLine("Dime un número: ");
+            Convert.ToInt32(Console.ReadLine());
+            
+    
+            
+
+
+
+        }
     }   
 }
 
