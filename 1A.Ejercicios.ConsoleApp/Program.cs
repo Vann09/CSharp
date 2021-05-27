@@ -83,12 +83,6 @@ namespace _1A.Ejercicios.ConsoleApp
             int numero = 100;
             Console.WriteLine("Dime un número: ");
             Convert.ToInt32(Console.ReadLine());
-            
-    
-            
-
-
-
         }
     }   
 }
