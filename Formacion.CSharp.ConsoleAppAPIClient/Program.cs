@@ -16,7 +16,7 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void Main(string[] args)
         {
-            APINorthwindPut();
+            APINorthwindDelete();
         }
 
         static void HttpwithDynamic()
@@ -282,17 +282,14 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
             producto.UnitsInStock = (short?)Convert.ToInt32(Console.ReadLine());
             producto.SupplierID = 2;
             producto.QuantityPerUnit = "2";
+                        
+            var content = new StringContent(JsonConvert.SerializeObject(producto), System.Text.Encoding.UTF8, "application/json");
 
-            var productoJSON = JsonConvert.SerializeObject(producto);
-            Console.WriteLine($"Producto en JSON: {productoJSON}");
-
-            var content = new StringContent(productoJSON, System.Text.Encoding.UTF8, "application/json");
-
-            response = http.PutAsync("products", content).Result;
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            response = http.PutAsync($"Products/{id}", content).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
-                var responseContent = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine($"Respuesta: {responseContent}");
+                
+                Console.WriteLine($"Producto modificado correctamente.");
                 
             }
             else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
@@ -301,7 +298,25 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void APINorthwindDelete()
         {
+            http.BaseAddress = new Uri("https://localhost:44355/api/");
+            HttpResponseMessage response;
 
+            Console.WriteLine("Id del producto: ");
+            var id = Console.ReadLine();
+            var producto = http.GetFromJsonAsync<Products>($"Products/{id}").Result;
+            
+            Console.WriteLine($"¿Quieres eliminar {producto.ProductName} ?");
+            if (Console.ReadLine().ToLower() == "si")
+            {
+                response = http.DeleteAsync($"Products/{id}").Result;
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+
+                    Console.WriteLine($"El producto, {producto.ProductName}, ha sido eliminado correctamente.");
+
+                }
+                else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+            }
         }
     }
 
