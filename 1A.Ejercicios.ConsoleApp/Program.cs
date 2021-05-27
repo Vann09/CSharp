@@ -45,7 +45,6 @@ namespace _1A.Ejercicios.ConsoleApp
             }
             else Console.WriteLine($"El arco coseno de {num} es {Math.Acos(num)}");
 
-
         }   
 
 

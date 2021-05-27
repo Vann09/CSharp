@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NorthWind.Models;
+using static System.Net.WebRequestMethods;
 
 namespace Formacion.CSharp.WebApplication1.Controllers
 {
@@ -14,6 +15,11 @@ namespace Formacion.CSharp.WebApplication1.Controllers
         //Mostrar listado de clientes
         public IActionResult Index()
         {
+            //var http = new HttpClient();
+            //http.BaseAddress = new Uri ("");
+
+           //var clientes = http.GetFromJsonAsync<List<Customers>>("customers").Result;
+
             var clientes = context.Customers.ToList();
             ViewBag.Title = "Listado de Clientes";
 

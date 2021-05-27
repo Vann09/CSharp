@@ -38,9 +38,6 @@ namespace MicroServicioNorthwind.api.v1._0
                     context.Response.Write(JsonConvert.SerializeObject(empleado));
                     context.Response.StatusCode = 200;
                 }
-
-                
-                
             }
             catch (Exception e)
             {
@@ -49,7 +46,6 @@ namespace MicroServicioNorthwind.api.v1._0
                 context.Response.StatusCode = 500;
             }
         }
-
         public bool IsReusable
         {
             get

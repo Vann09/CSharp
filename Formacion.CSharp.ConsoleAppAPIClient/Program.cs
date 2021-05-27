@@ -16,7 +16,7 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void Main(string[] args)
         {
-            Ejercicio2();
+            APINorthwindPut();
         }
 
         static void HttpwithDynamic()
@@ -169,13 +169,150 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void Ejercicio2()
         {
-            http.BaseAddress = new Uri("");
+            http.BaseAddress = new Uri("https://localhost:44312/api/v1.0/");
             //empleados.ashx?id=3
 
             Console.WriteLine("ID Empleado: ");
             var id = Console.ReadLine();
+            var response = http.GetAsync($"empleados.ashx?id={id}").Result;
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var contentType = response.Content.Headers.ContentType.MediaType;
+                var content = response.Content.ReadAsStringAsync().Result;
+
+                if (contentType == "text/plain")
+                {
+                    Console.WriteLine(content);
+                }
+                else
+                {
+                    var empleado = JsonConvert.DeserializeObject<Employees>(content);
+
+                    Console.WriteLine($"{empleado.FirstName} {empleado.LastName}");
+                    Console.WriteLine($"{empleado.Title}");
+                    Console.WriteLine($"{empleado.Country} {empleado.City}");
+                }
+            }
+            else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+        }
+
+        static void APINorthwindGet()
+        {
+            //products/15
+            HttpResponseMessage response;
+            http.BaseAddress = new Uri("https://localhost:44355/api/");
+            Console.WriteLine("Id del producto: ");
+            var id = Console.ReadLine();
+
+            
+
+            switch (id.ToLower())
+            {
+                case "all":
+                    response = http.GetAsync("Products").Result;
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        var productos = JsonConvert.DeserializeObject<List<Products>>(content);
+
+                        foreach (var p in productos)
+                        Console.WriteLine($" {p.ProductID}# Producto: {p.ProductName} Proveedor: {p.Supplier}");
+                    }
+                    else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+                    break;
+                default:
+                    response = http.GetAsync($"Products/{id}").Result;
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        var producto = JsonConvert.DeserializeObject<Products>(content);
+
+                        Console.WriteLine($" {producto.ProductID}# Producto: {producto.ProductName}");
+                        Console.WriteLine($"Stock: {producto.UnitsInStock} Precio: {producto.UnitPrice}");
+                    }
+                    else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+                    break;
+            }
+        }    
+
+        static void APINorthwindPost() //78 he creado
+        {
+            http.BaseAddress = new Uri("https://localhost:44355/api/");
+            HttpResponseMessage response;
+
+            var producto = new Products();
+            Console.WriteLine("Nombre del producto: ");
+            producto.ProductName = Console.ReadLine();
+            producto.UnitPrice = (decimal?)3.54;
+            producto.UnitsInStock = 10;
+            producto.SupplierID = 2;
+            producto.QuantityPerUnit = "2";
+
+            var productoJSON = JsonConvert.SerializeObject(producto);
+            Console.WriteLine($"Producto en JSON: {productoJSON}");
+
+            var content = new StringContent(productoJSON, System.Text.Encoding.UTF8, "application/json");
+
+            response = http.PostAsync("products", content).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                var responseContent = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine($"Respuesta: {responseContent}");
+            }
+            else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+
+        }
+
+        static void APINorthwindPut()
+        {
+            http.BaseAddress = new Uri("https://localhost:44355/api/");
+            HttpResponseMessage response;
+           
+            Console.WriteLine("Id del producto: ");
+            var id = Console.ReadLine();
+
+            var producto = http.GetFromJsonAsync<Products>($"Products/{id}").Result;
+            Console.WriteLine("Nombre del producto: ");
+            producto.ProductName = Console.ReadLine();
+            Console.WriteLine("Precio: ");
+            producto.UnitPrice = Convert.ToDecimal(Console.ReadLine());
+            Console.WriteLine("Unidades: ");
+            producto.UnitsInStock = (short?)Convert.ToInt32(Console.ReadLine());
+            producto.SupplierID = 2;
+            producto.QuantityPerUnit = "2";
+
+            var productoJSON = JsonConvert.SerializeObject(producto);
+            Console.WriteLine($"Producto en JSON: {productoJSON}");
+
+            var content = new StringContent(productoJSON, System.Text.Encoding.UTF8, "application/json");
+
+            response = http.PutAsync("products", content).Result;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var responseContent = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine($"Respuesta: {responseContent}");
+                
+            }
+            else Console.WriteLine("Error: {0}", response.StatusCode.ToString());
+
+        }
+
+        static void APINorthwindDelete()
+        {
 
         }
     }
-    
+
+
+
+
+
+
+
+
+
 }
+    
+
