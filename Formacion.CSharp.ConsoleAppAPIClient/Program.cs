@@ -16,7 +16,7 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void Main(string[] args)
         {
-            APINorthwindDelete();
+            APINorthwindPost();
         }
 
         static void HttpwithDynamic()
@@ -201,7 +201,7 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
         {
             //products/15
             HttpResponseMessage response;
-            http.BaseAddress = new Uri("https://localhost:44355/api/");
+            http.BaseAddress = new Uri("https://localhost:44355/api/"); 
             Console.WriteLine("Id del producto: ");
             var id = Console.ReadLine();
 
@@ -249,11 +249,8 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
             producto.UnitsInStock = 10;
             producto.SupplierID = 2;
             producto.QuantityPerUnit = "2";
-
-            var productoJSON = JsonConvert.SerializeObject(producto);
-            Console.WriteLine($"Producto en JSON: {productoJSON}");
-
-            var content = new StringContent(productoJSON, System.Text.Encoding.UTF8, "application/json");
+                        
+            var content = new StringContent(JsonConvert.SerializeObject(producto), System.Text.Encoding.UTF8, "application/json");
 
             response = http.PostAsync("products", content).Result;
             if (response.StatusCode == System.Net.HttpStatusCode.Created)
@@ -319,15 +316,6 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
             }
         }
     }
-
-
-
-
-
-
-
-
-
 }
     
 
