@@ -269,7 +269,7 @@ namespace Formacion.CSharp.ConsolaApp1
             //Opción 3, utilizando condición ? :
             reserva.fumador = (fumador.ToLower().Trim() == "si" || fumador.ToLower().Trim() == "sí") ? true : false;
 
-            //Opción 4, tulizando SWITCH
+            //Opción 4, ulizando SWITCH
             switch (fumador.ToLower().Trim())
             {
                 case "si":

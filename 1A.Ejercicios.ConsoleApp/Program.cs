@@ -10,7 +10,7 @@ namespace _1A.Ejercicios.ConsoleApp
        
         static void Main(string[] args)
         {
-            Adivinanza();
+            SecFor();
         }
 
         static void Saludo()
@@ -82,9 +82,57 @@ namespace _1A.Ejercicios.ConsoleApp
             //E1. Pregunta un número al operador y muestra el mensaje los siguientes mensajes:
             int numero = 100;
             Console.WriteLine("Dime un número: ");
-            Convert.ToInt32(Console.ReadLine());
+            int num;
+            do
+            {
+                num = Convert.ToInt32(Console.ReadLine());
+                if ((numero - num) >= 25)
+                {
+                    Console.WriteLine($"El número {num} es demasiado pequeño.");
+                }
+                else if (numero > num)
+                {
+                    Console.WriteLine($"El número {num} es  pequeño.");
+                }
+                if ((num - numero) >= 25)
+                {
+                    Console.WriteLine($"El número {num} es demasiado grande.");
+                }
+                else if (numero < num)
+                {
+                    Console.WriteLine($"El número {num} es grande.");
+                }
+                if (numero == num)
+                {
+                    Console.WriteLine($"Has acertado, el número era {num}.");
+                }
+                
+            } while (numero != num);
+            
         }
+    
+        static void SecFor()
+        {
+            //F1. Muestra las siguientes secuencias de número utilizando un FOR:
+
+            /*del 1 al 100 DONE
+            for (int i = 1; i < 101; i++) Console.WriteLine(i);*/
+
+            /*del 200 al 190 DONE
+            for (int i = 0; i < 11; i++ ) Console.WriteLine(200-i);*/
+
+            /*del 10 a 10000 de 100 en 100
+            for (int i = 1; i < 10000; i = i + 100) Console.WriteLine(i);*/
+
+            /*los números impares del 51 al 91 DONE
+            for (int i = 51; i < 93; i = i + 2) Console.WriteLine(i);*/
+
+
+        }
+
+
     }   
+
 }
 
 

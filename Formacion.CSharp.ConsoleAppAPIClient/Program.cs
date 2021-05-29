@@ -16,7 +16,7 @@ namespace Formacion.CSharp.ConsoleAppAPIClient
 
         static void Main(string[] args)
         {
-            APINorthwindPost();
+            APINorthwindGet();
         }
 
         static void HttpwithDynamic()
