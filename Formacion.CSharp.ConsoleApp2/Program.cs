@@ -75,7 +75,7 @@ namespace Formacion.CSharp.ConsoleApp2
         //Miembro: Propiedad asociada a una variable
         public string Nombre
         {
-            //Retornamos la información despues de tranformarla.
+            //Retornamos la información despues de transformarla.
             get
             {
                 return nombre.Trim().ToLower();

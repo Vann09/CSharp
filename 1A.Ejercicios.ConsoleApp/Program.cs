@@ -10,7 +10,7 @@ namespace _1A.Ejercicios.ConsoleApp
        
         static void Main(string[] args)
         {
-            While();
+            Colors();
         }
 
         static void Saludo()
@@ -186,8 +186,31 @@ namespace _1A.Ejercicios.ConsoleApp
                 }
                 
             } while (num < 91);*/
+
+            /*tabla de multiplicar de PI DONE
+            int i = 0;
+            do
+            {
+                i++;
+                Console.WriteLine($"{i} x {Math.PI:0.000} = {i * Math.PI:0.000}");
+            } while (i < 10);*/
+
+            //del 20 al 10 multimplicado del 5 a 8, utilizando un FOR
+
         }
-    }   
+
+        static void Colors()
+        {
+            //I1. Pregunta al operador 5 colores
+            //I2. Muestra los colores ordenados
+            //I3. Muestra el color que más letras contenga
+            //I4.Muestra el color que más vocales contenga
+
+        }
+
+
+
+    }
 
 }
 
