@@ -10,7 +10,7 @@ namespace _1A.Ejercicios.ConsoleApp
        
         static void Main(string[] args)
         {
-            SecFor();
+            While();
         }
 
         static void Saludo()
@@ -127,10 +127,66 @@ namespace _1A.Ejercicios.ConsoleApp
             /*los números impares del 51 al 91 DONE
             for (int i = 51; i < 93; i = i + 2) Console.WriteLine(i);*/
 
+            /*los multiplos de 5 del 40 al 30 DONE
+            for (int i = 30; i < 41; i= i+5) Console.WriteLine(i);*/
 
+            /*tabla de multiplicar de PI DONE
+            for (int i = 1; i < 11; i++) Console.WriteLine($"{i} x {Math.PI:0.000} = {i * Math.PI:0.000}");*/
+
+            /* del 10 al 20 sumado con el anterior ????
+
+
+            del 20 al 10 multimplicado del 5 a 8, utilizando dos FOR ????
+            20x5, 20x6, 20x7..., 19x5, 19x6... Y así */
         }
 
+        static void Anything()
+        {
+            // G1. Pregunta al operador cualquier cosa.
+            string ask;
+            do
+            {
+                Console.WriteLine("Dime lo que quieras: ");
+                ask = Console.ReadLine();
+                switch (ask.ToLower().Trim())
+                {
+                    // G3. Esta secuencia de *pregunta/mostrar en pantalla* se repite hasta que el operado responde *fin*
+                    case "fin":
+                        break;
+                    // G2. Muestra por ***Simón dice xxxxxxxxx*** incluyendo la respuesta del operador
+                    default:
+                        Console.WriteLine($"Simón dice {ask}.");
+                        break;
+                }
+            } while (ask != "fin");
 
+            
+            
+        }
+    
+        static void While()
+        {
+            // H1. Muestra las siguientes secuencias de número utilizando un WHILE:
+            /*del 1 al 100 DONE
+            int num = 0;
+            do
+            {
+                num++;
+                Console.WriteLine(num);
+            } while (num < 100);*/
+
+            /*los números impares del 51 al 91 DONE
+            int num = 50;
+            do
+            {
+                num++;
+                if (num%2 != 0)
+                {
+                    Console.WriteLine(num);
+                }
+                
+            } while (num < 91);*/
+        }
     }   
 
 }
