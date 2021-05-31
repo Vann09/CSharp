@@ -79,7 +79,6 @@ namespace Formacion.CSharp.ConsoleAppData
 
             var db = new ModelNorthwind();
 
-
             //Consulta de Datos - SELECT
             //Equivalente a: SELECT * FROM Customers
 

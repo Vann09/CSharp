@@ -45,7 +45,7 @@ namespace Formacion.CSharp.ConsoleApp2
         }
 
         /// <summary>
-        /// Método que recibe un parámetros
+        /// Método que recibe un parámetro
         /// </summary>
         /// <param name="a">Representa un objeto Alumno creado con Struct, es de valor</param>
         static void Transformar(Alumno2 a)
