@@ -202,6 +202,8 @@ namespace _1A.Ejercicios.ConsoleApp
         static void Colors()
         {
             //I1. Pregunta al operador 5 colores
+            Console.WriteLine("Dime 5 colores de 1 en 1");
+            
             //I2. Muestra los colores ordenados
             //I3. Muestra el color que más letras contenga
             //I4.Muestra el color que más vocales contenga

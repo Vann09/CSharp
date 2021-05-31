@@ -41,11 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formacion.CSharp.APINorthwi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Herencia", "5.Herencia", "{25A40232-525B-4135-9A3A-E137586FBAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp.ConsoleAppInherited", "Formacion.CSharp.ConsoleAppInherited\Formacion.CSharp.ConsoleAppInherited.csproj", "{6073ADEE-B659-4CF8-8D6A-1E676FF328D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formacion.CSharp.ConsoleAppInherited", "Formacion.CSharp.ConsoleAppInherited\Formacion.CSharp.ConsoleAppInherited.csproj", "{6073ADEE-B659-4CF8-8D6A-1E676FF328D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Tareas", "6.Tareas", "{951D3922-222D-4E48-948B-AC44369D1190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp. ConsoleAppTask", "Formacion.CSharp. ConsoleAppTask\Formacion.CSharp. ConsoleAppTask.csproj", "{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formacion.CSharp. ConsoleAppTask", "Formacion.CSharp. ConsoleAppTask\Formacion.CSharp. ConsoleAppTask.csproj", "{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formacion.CSharp.ConsoleAppTask2", "Formacion.CSharp.ConsoleAppTask2\Formacion.CSharp.ConsoleAppTask2.csproj", "{6D57398E-1EE7-48F3-8E96-73397277E369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D57398E-1EE7-48F3-8E96-73397277E369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D57398E-1EE7-48F3-8E96-73397277E369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D57398E-1EE7-48F3-8E96-73397277E369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D57398E-1EE7-48F3-8E96-73397277E369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{33309372-5953-4A78-B405-5A0ACA517906} = {3F23D274-4FC7-4471-931F-A0318E045072}
 		{6073ADEE-B659-4CF8-8D6A-1E676FF328D9} = {25A40232-525B-4135-9A3A-E137586FBAB1}
 		{91D99DE8-9F38-43E6-A0DD-FFC027B88FBE} = {951D3922-222D-4E48-948B-AC44369D1190}
+		{6D57398E-1EE7-48F3-8E96-73397277E369} = {951D3922-222D-4E48-948B-AC44369D1190}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99E031E1-A57D-4E00-9DC5-878FECC5E4D0}
